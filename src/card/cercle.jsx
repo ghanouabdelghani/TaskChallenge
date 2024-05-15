@@ -1,31 +1,16 @@
 import React from "react";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
+const value = 75;
 export default function Cercle() {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      className="circular-progressbar"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        className="circle-background"
-        cx="12"
-        cy="12"
-        r="11"
-        strokeWidth="2px"
+    <div style={{ width: 50 }}>
+      <CircularProgressbar
+        value={value}
+        strokeWidth={10}
+        styles={{ root: { width: "100%" } }}
       />
-      <circle
-        className="circle-progress"
-        cx="12"
-        cy="12"
-        r="11"
-        strokeWidth="2px"
-        transform="rotate(-90 12 12)"
-        style={{ strokeDasharray: 69.115, strokeDashoffset: 69.115 }}
-      />
-    </svg>
+    </div>
   );
 }
-

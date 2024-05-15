@@ -11,10 +11,9 @@ export const taskSlice = createSlice({
     addTask(state, action) {
       return [...state.task, action.payload];
     },
-   
   },
 });
 
-export const { addTask } = counterSlice.actions;
+export const { addTask } = taskSlice.actions;
 
-export default counterSlice.reducer;
+export default taskSlice.reducer;

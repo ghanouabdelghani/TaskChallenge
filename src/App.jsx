@@ -5,6 +5,20 @@ import Button from "./redux/button/button";
 import Card from "./card/card";
 
 function App() {
+  const tasks = [
+    {
+      task: "Go to gym",
+      priority: "high",
+    },
+    {
+      task: "Read a book",
+      priority: "medium",
+    },
+    {
+      task: "Restart Learning Solidworks",
+      priority: "low",
+    },
+  ];
   return (
     <div>
       <div
@@ -26,8 +40,10 @@ function App() {
         </h2>
         <Button />
       </div>
-      <div style={{}}>
-        <Card />
+      <div>
+        {tasks.map((task, index) => (
+          <Card key={index} task={task.task} priority={task.priority} />
+        ))}
       </div>
     </div>
   );

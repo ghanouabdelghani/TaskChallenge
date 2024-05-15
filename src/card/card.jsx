@@ -15,31 +15,51 @@ const button = {
   padding: "7px 14px",
 };
 
-export default function Card() {
+const container = {
+  background: "#fff",
+  borderRadius: "24px",
+  boxShadow: "0 6px 58px rgba(196, 203, 214, .104)",
+  display: "flex",
+  // display: "grid",
+  // gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginTop: "15px",
+  padding: "22px 30px",
+};
+
+const para = { color: "#91929e", fontSize: "14px" };
+
+const subpara = {
+  color: "#0a1629",
+  fontSize: "16px",
+};
+const getPrioritycolor = (p) => {
+  switch (p) {
+    case "high":
+      return "red";
+    case "medium":
+      return "orange";
+    case "low":
+      return "green";
+  }
+};
+
+export default function Card({ task, priority }) {
   return (
-    <div
-      style={{
-        background: "#fff",
-        borderRadius: "24px",
-        boxShadow: "0 6px 58px rgba(196, 203, 214, .104)",
-        display: "flex",
-        justifyContent: "space-between",
-        marginTop: "15px",
-        padding: "22px 30px",
-      }}
-    >
-      <div>
-        <p>Task</p>
-        <p>Priority</p>
+    <div style={container}>
+      <div style={{ width: "200px" }}>
+        <p style={para}>Task</p>
+        <p style={subpara}>{task}</p>
       </div>
       <div>
-        <p>Go to gym</p>
-        <p> high</p>
+        <p style={para}>priority</p>
+        <p style={{ ...subpara, color: getPrioritycolor(priority) }}>
+          {" "}
+          {priority}
+        </p>
       </div>
-      <button style={button}>
-        {" "}
-        To Do
-      </button>
+      <button style={button}> To Do</button>
       <div style={{ marginRight: "20px" }}>
         <Cercle />
       </div>
