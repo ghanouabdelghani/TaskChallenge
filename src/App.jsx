@@ -3,22 +3,26 @@ import logo from "./logo.svg";
 import "./App.css";
 import Button from "./redux/button/button";
 import Card from "./card/card";
+import { useSelector } from "react-redux";
 
 function App() {
-  const tasks = [
-    {
-      task: "Go to gym",
-      priority: "high",
-    },
-    {
-      task: "Read a book",
-      priority: "medium",
-    },
-    {
-      task: "Restart Learning Solidworks",
-      priority: "low",
-    },
-  ];
+  const tasks = useSelector((state) => state.tasks.task);
+  console.log(tasks);
+
+  // const tasks = [
+  //   {
+  //     task: "Go to gym",
+  //     priority: "high",
+  //   },
+  //   {
+  //     task: "Read a book",
+  //     priority: "medium",
+  //   },
+  //   {
+  //     task: "Restart Learning Solidworks",
+  //     priority: "low",
+  //   },
+  // ];
   return (
     <div>
       <div
@@ -42,7 +46,7 @@ function App() {
       </div>
       <div>
         {tasks.map((task, index) => (
-          <Card key={index} task={task.task} priority={task.priority} />
+          <Card key={index} task={task.taskValue} priority={task.priority} />
         ))}
       </div>
     </div>

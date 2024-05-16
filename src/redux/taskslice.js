@@ -5,11 +5,12 @@ const initialState = {
 };
 
 export const taskSlice = createSlice({
-  name: "task",
+  name: "tasks",
   initialState,
   reducers: {
     addTask(state, action) {
-      return [...state.task, action.payload];
+      console.log(state);
+      state.task.push(action.payload);
     },
   },
 });

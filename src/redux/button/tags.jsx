@@ -23,7 +23,10 @@ const getTaggsstyle = (t) => {
   }
 };
 
-export default function Tags({ texte }) {
+export default function Tags({ texte, sendPriority }) {
+  const handleClick = () => {
+    sendPriority(texte);
+  };
   return (
     <div>
       <button
@@ -32,7 +35,7 @@ export default function Tags({ texte }) {
           borderRadius: "10px",
           ...getTaggsstyle(texte),
         }}
-        onClick={sendPriority(texte)}
+        onClick={handleClick}
       >
         {texte}
       </button>

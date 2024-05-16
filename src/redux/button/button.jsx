@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Tags from "./tags";
+import { UseDispatch, useDispatch } from "react-redux";
+import { addTask } from "../taskslice";
 
 const buttonStyle = {
   display: "flex",
@@ -45,7 +47,13 @@ const buttone = {
 
 export default function Button() {
   const [taskValue, setTaskValue] = useState("");
-  const [priority, setPriority] = useState("")
+  const [priority, setPriority] = useState("");
+  const dispatch = useDispatch();
+  const sendPriority = (p) => {
+    console.log("xxxx", p);
+    setPriority(p);
+  };
+
   return (
     <Popup
       trigger={<button style={buttonStyle}>Add Task</button>}
@@ -57,65 +65,95 @@ export default function Button() {
         padding: "30px",
         width: "400px",
         height: "400px",
+       
       }}
     >
-      <div className="modal">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: "20px",
-          }}
-        >
-          <h2>Add Task</h2>
-          <button
-            style={{
-              textAlign: "center",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <p>x</p>
-          </button>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-          }}
-        >
-          <p style={{ color: "#7D8592" }}>Task</p>
-          <input
-            style={input}
-            type="text"
-            placeholder="Type your task here ..."
-            onChange={(e) => {
-              setTaskValue(e.target.value);
-            }}
-          />
-          <div
-            style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-          >
-            <p
+      {(close) => (
+        <div>
+          <div className="modal">
+            <div
               style={{
-                color: "#7D8592",
-                fontSize: "14px",
-                marginBottom: "15px",
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: "20px",
               }}
             >
-              priority
-            </p>
-            <div style={{ display: "flex", gap: "16px" }}>
-              <Tags texte="high" />
-              <Tags texte="medium" />
-              <Tags texte="low" />
+              <h2>Add Task</h2>
+              <button
+                style={{
+                  textAlign: "center",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                <p>x</p>
+              </button>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "20px",
+              }}
+            >
+              <p style={{ color: "#7D8592" }}>Task</p>
+              <input
+                style={input}
+                type="text"
+                placeholder="Type your task here ..."
+                onChange={(e) => {
+                  setTaskValue(e.target.value);
+                }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <p
+                  style={{
+                    color: "#7D8592",
+                    fontSize: "14px",
+                    marginBottom: "15px",
+                  }}
+                >
+                  priority
+                </p>
+                <div style={{ display: "flex", gap: "16px" }}>
+                  <Tags
+                    texte="high"
+                    sendPriority={() => sendPriority("high")}
+                  />
+                  <Tags
+                    texte="medium"
+                    sendPriority={() => sendPriority("medium")}
+                  />
+                  <Tags texte="low" sendPriority={() => sendPriority("low")} />
+                </div>
+              </div>
             </div>
           </div>
+          <button
+            onClick={() => {
+              console.log({ taskValue });
+              console.log({ priority });
+              dispatch(
+                addTask({
+                  taskValue,
+                  priority,
+                })
+              );
+              close();
+            }}
+            style={buttone}
+          >
+            Add
+          </button>
         </div>
-      </div>
-      <button style={buttone}>Add</button>
+      )}
     </Popup>
   );
 }
